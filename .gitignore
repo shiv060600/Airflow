@@ -1,0 +1,8 @@
+logs/*
+simple_auth_manager_passwords.json
+*.bat
+.env
+airflow.*
+airflow_env_linux/*
+dags/__pycache__/*
+docker_dags/__pycache__/*
