@@ -1,12 +1,13 @@
+import pendulum
 from airflow import DAG
 from airflow.providers.standard.operators.bash import BashOperator
-import datetime
 
+local_timezone = pendulum.timezone("America/New_York")
 
 default_args = {
     "depends_on_past" : False,
     "retries" : 0,
-    "start_date" : datetime.datetime(2024,1,1),
+    "start_date" : pendulum.datetime(2024, 1, 1, tz=local_timezone),
     "owner" : "admin"
 }
 
@@ -16,7 +17,8 @@ with DAG(
     description = 'daily remarks report with latest remarks from singapore + sandy',
     schedule = '0 18 * * *',
     catchup = False,
-    tags = ['daily','remarks']
+    tags = ['daily','remarks'],
+    timezone = local_timezone
 ) as daily_remarks_dag:
     
     daily_remarks_runner = BashOperator(

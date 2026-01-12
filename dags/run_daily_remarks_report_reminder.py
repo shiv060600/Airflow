@@ -1,9 +1,11 @@
+import pendulum
 from airflow import DAG
 from airflow.providers.standard.operators.bash import BashOperator
-import datetime
+
+local_timezone = pendulum.timezone("America/New_York")
 
 default_args = {
-    "start_date" : datetime.datetime(2024,1,1),
+    "start_date" : pendulum.datetime(2024, 1, 1, tz=local_timezone),
     "retries" : 0,
     "depends_on_past" : False,
     "owner" : "admin"
@@ -14,7 +16,8 @@ with DAG(
     tags = ['daily','reminder'],
     schedule = "30 8 * * 1-5",
     catchup = False,
-    default_args = default_args
+    default_args = default_args,
+    timezone = local_timezone
     ) as daily_remarks_reminder:
 
     daily_remakrs_reminder_runner = BashOperator(

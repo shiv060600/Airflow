@@ -1,12 +1,13 @@
+import pendulum
 from airflow import DAG
 from airflow.providers.standard.operators.bash import BashOperator
-import datetime
 
+local_timezone = pendulum.timezone("America/New_York")
 
 default_args = {
     'owner' : 'admin',
     'depends_on_past': False,
-    'start_date': datetime.datetime(2024,1,1),
+    'start_date': pendulum.datetime(2024, 1, 1, tz=local_timezone),
     'retries': 0
 }
 
@@ -16,7 +17,8 @@ monthly_dag = DAG(
     description = 'monthly upload of ingram sales',
     schedule = "0 17 5 * *", #monthly on the 5th day at 5pm
     tags = ['monthly','sales','ingram'],
-    catchup = False
+    catchup = False,
+    timezone = local_timezone
 )
 
 

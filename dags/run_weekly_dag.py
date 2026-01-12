@@ -1,12 +1,14 @@
 #type: ignore
+import pendulum
 from airflow import DAG
 from airflow.providers.standard.operators.bash import BashOperator
-from datetime import datetime
+
+local_timezone = pendulum.timezone("America/New_York")
 
 default_args = {
     'owner' : 'admin',
     'depends_on_past': False,
-    'start_date': datetime(2024,1,1),
+    'start_date': pendulum.datetime(2024, 1, 1, tz=local_timezone),
     'retries': 0
 }
 
@@ -14,9 +16,10 @@ weekly_dag = DAG(
     'weekly_backorders',
     default_args = default_args,
     description = 'Weekly Backorders, Executed Friday 10PM',
-    schedule = '0 22 * * 5', #10pm Frdiday
+    schedule = '0 22 * * 5', #10pm Friday
     catchup = False,
-    tags = ['backorders','weekly']
+    tags = ['backorders','weekly'],
+    timezone = local_timezone
 )
 
 run_upload_backorders = BashOperator(
