@@ -1,16 +1,13 @@
-from datetime import tzinfo
-from time import timezone
+import pendulum
 from airflow import DAG
 from airflow.providers.standard.operators.bash import BashOperator
-import pendulum
-
 
 local_timezone = pendulum.timezone("America/New_York")
 
 default_args = {
     'owner' : 'admin',
     'depends_on_past': False,
-    'start_date': pendulum.datetime(2024, 1, 1, tz = local_timezone),
+    'start_date': pendulum.datetime(2024, 1, 1, tz=local_timezone),
     'retries': 0
 }
 
@@ -20,7 +17,7 @@ pgc_pguk_dag = DAG(
     schedule='0 22 4 * *', #run monthly on the 5th at 10pm
     tags= ['pgc','pguk','monthly'],
     catchup = False,
-    timezone = local_timezone
+    default_args = default_args
 )
 
 run_pgc_pguk = BashOperator(

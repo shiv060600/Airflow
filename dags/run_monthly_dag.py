@@ -17,8 +17,7 @@ monthly_dag = DAG(
     description = 'monthly upload of ingram sales',
     schedule = "0 17 5 * *", #monthly on the 5th day at 5pm
     tags = ['monthly','sales','ingram'],
-    catchup = False,
-    timezone = local_timezone
+    catchup = False
 )
 
 

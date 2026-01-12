@@ -18,8 +18,7 @@ weekly_dag = DAG(
     description = 'Weekly Backorders, Executed Friday 10PM',
     schedule = '0 22 * * 5', #10pm Friday
     catchup = False,
-    tags = ['backorders','weekly'],
-    timezone = local_timezone
+    tags = ['backorders','weekly']
 )
 
 run_upload_backorders = BashOperator(

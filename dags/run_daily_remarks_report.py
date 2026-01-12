@@ -17,8 +17,7 @@ with DAG(
     description = 'daily remarks report with latest remarks from singapore + sandy',
     schedule = '0 18 * * *',
     catchup = False,
-    tags = ['daily','remarks'],
-    timezone = local_timezone
+    tags = ['daily','remarks']
 ) as daily_remarks_dag:
     
     daily_remarks_runner = BashOperator(

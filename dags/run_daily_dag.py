@@ -17,8 +17,7 @@ daily_dag = DAG(
     description = 'Daily upload of mapping files and rerun comined_report and report_three_combined',
     schedule = '0 21 * * *',
     catchup = False,
-    tags = ['sales','daily'],
-    timezone = local_timezone
+    tags = ['sales','daily']
 )
 
 run_daily = BashOperator(

@@ -17,8 +17,7 @@ weekly_backorders_reminder = DAG(
     description = 'email the team to make sure the backorders  file is in the right place',
     schedule = '0 8 * * 5',
     catchup = False,
-    tags = ['weekly','reminder'],
-    timezone = local_timezone
+    tags = ['weekly','reminder']
 )
 
 send_backorders_email = BashOperator(

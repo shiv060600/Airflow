@@ -18,8 +18,7 @@ monthly_sales_reminder = DAG(
     description = 'email the team to make sure the monthly sales file is in the right place',
     schedule = '0 9 5 * *',
     catchup = False,
-    tags = ['monthly','reminder'],
-    timezone = local_timezone
+    tags = ['monthly','reminder']
 )
 
 send_email = BashOperator(

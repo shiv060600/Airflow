@@ -16,8 +16,7 @@ with DAG(
     tags = ['daily','reminder'],
     schedule = "30 8 * * 1-5",
     catchup = False,
-    default_args = default_args,
-    timezone = local_timezone
+    default_args = default_args
     ) as daily_remarks_reminder:
 
     daily_remakrs_reminder_runner = BashOperator(
