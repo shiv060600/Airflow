@@ -25,19 +25,19 @@ with DAG(
     run_download_backorders = BashOperator(
             task_id='run_download_backorders',
             bash_command='powershell.exe -Command "cd H:\\Upgrading_Database_Reporting_Systems\\REPORTING_PIPELINE; conda activate reportingenv; python -m src.ftp_downloads.daily_backorders"',
-            dag=weekly_dag,
+            dag=daily_book_reports,
         )
 
     run_upload_backorders = BashOperator(
         task_id='run_upload_backorders',
         bash_command='powershell.exe -Command "cd H:\\Upgrading_Database_Reporting_Systems\\REPORTING_PIPELINE; conda activate reportingenv; python -m src.database_uploads.upload_backorders"',
-        dag=weekly_dag,
+        dag=daily_book_reports,
     )
 
     run_book_level_reports = BashOperator(
         task_id='run_booklevel_reports',
         bash_command='powershell.exe -Command "cd H:\\Upgrading_Database_Reporting_Systems\\REPORTING_PIPELINE; conda activate reportingenv; python -m src.run_daily_book_level_reports"',
-        dag=weekly_dag
+        dag=daily_book_reports
     )
 
     run_download_backorders >> run_upload_backorders >> run_book_level_reports
