@@ -12,14 +12,6 @@ default_args = {
     'retries': 0
 }
 
-weekly_dag = DAG(
-    'daily_book_reports',
-    default_args = default_args,
-    description = 'Weekly Backorders, Executed Friday 10PM',
-    schedule = '0 22 * * 5', #10pm Friday
-    catchup = False,
-    tags = ['backorders','weekly']
-)
 
 with DAG(
     'daily_book_reports',
