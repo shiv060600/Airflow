@@ -17,7 +17,7 @@ with DAG(
     'daily_book_reports',
     default_args = default_args,
     description = 'Weekly Backorders, Executed Friday 10PM',
-    schedule = '0 7 * * *', #7 am every day
+    schedule = '45 7 * * *', #7 am every day
     catchup = False,
     tags = ['backorders','weekly']
 ) as daily_book_reports:
